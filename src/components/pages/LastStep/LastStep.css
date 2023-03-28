@@ -1,0 +1,79 @@
+.bg-image-last-page {
+  width: 100%;
+  height: auto;
+  background-image: url("../../../images/pexels-scott-webb-305833.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  object-fit: cover;
+}
+.terms {
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  font-size: 0.885rem;
+  line-height: 1.25rem;
+  opacity: 1;
+  color: rgba(121, 121, 129, var(--tw-text-opacity));
+}
+.last-step {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.last-btn {
+  width: 60%;
+}
+.ratings {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgba(248, 140, 0, var(--tw-text-opacity));
+}
+
+.profile {
+  border: 2px solid #dfdfdf;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+.avatar {
+  padding: 20%;
+}
+
+.last-step-sidebar__title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgba(73, 73, 80, var(--tw-text-opacity));
+}
+.last-step-sidebar__text {
+  font-weight: 700;
+}
+.last-step-sidebar__quote {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+}
+.profile-name {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgba(73, 73, 80, var(--tw-text-opacity));
+}
+.profile-comment {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .last-step {
+    padding: 0% 4%;
+  }
+  .last-btn {
+    width: auto;
+  }
+}

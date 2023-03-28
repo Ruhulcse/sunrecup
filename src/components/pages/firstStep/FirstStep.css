@@ -1,0 +1,102 @@
+.bg-image {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../images/pexels-scott-webb-305833.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  object-fit: cover;
+}
+.overflow {
+  position: absolute;
+}
+.top-logo img {
+  margin-top: 58px;
+  border-radius: 50%;
+  background-color: white;
+}
+.step-one {
+  margin-top: 3%;
+}
+.input-label-f {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  opacity: 1;
+  color: rgba(75, 85, 99, var(--tw-text-opacity));
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 24pt;
+  font-weight: 500;
+  font-family: "Nunito Sans", sans-serif;
+}
+.start-btn {
+  background-color: #9fde00;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  width: -webkit-fill-available;
+  padding: 1% 0%;
+  border-radius: 5px;
+}
+.start-btn:hover {
+  background-color: #9fde00;
+  color: #ffffff;
+  border: none;
+}
+.main {
+  padding: 4% 25%;
+}
+.title h2 {
+  font-weight: 700;
+}
+.description p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.invalid {
+  border-color: red;
+}
+.error {
+  color: red;
+}
+.form-control::placeholder {
+  color: #a8a8a8;
+}
+.form-control:focus {
+  border-color: #f88c00;
+  box-shadow: none;
+}
+
+.invalid-placeholder::placeholder {
+  color: red;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 4% 2%;
+  }
+  .card {
+    height: auto;
+    max-width: 24rem;
+  }
+  .description p {
+    font-size: 14px;
+  }
+  .step-one {
+    padding: 0% 2%;
+  }
+  .bgc-image {
+    height: 70vh;
+  }
+}
