@@ -42,13 +42,11 @@ const ThirdStep = () => {
     const [geschat, setGeschat] = useState("Zeer laag (2 personen, tot 2.000 kWh)");
     const [zonnepanelen, setZonnepanelen] = useState("Ik weet het nog niet, afhankelijk van advies & informatie");
     const {formdata, setFormdata} = useContext(multiStepContext)
-    console.log(formdata)
     const navigate = useNavigate()
     const handleThirdtStep = (e)=>{
       e.preventDefault()
          setFormdata({...formdata,  doel:doel, hellingshoek:hellingshoek, ligging:ligging, geschat:geschat,zonnepanelen:zonnepanelen})
          navigate('/last-step')
-         console.log('click')
     }
   return (
     <div>

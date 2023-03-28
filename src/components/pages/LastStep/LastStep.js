@@ -20,28 +20,9 @@ const LastStep = () => {
   const [telefoonnummer, setTelefoonnummer] = useState('');
   const navigate = useNavigate();
     const { formdata, setFormdata } = useContext(multiStepContext)
-    console.log(formdata)
     const sendEmail = (e) => {
       e.preventDefault();
-      const errors = [
-        voornaamisValid,
-        achternaamisValid,
-        emailadresisValid,
-        telefoonnummerisValid
-      ]
-      if(!errors.includes(true)){
-        setFormdata({...formdata, voornaam:voornaam, achternaam:achternaam, emailadres:emailadres, telefoonnummer:telefoonnummer })
-      }else{
-        Swal.fire({
-            title: "Error",
-            text:'please fill up all input field',
-            icon: "error",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            confirmButtonText: "Ok",
-          })
-      }
-    
+      setFormdata({...formdata, voornaam:voornaam, achternaam:achternaam, emailadres:emailadres, telefoonnummer:telefoonnummer })
       emailjs.send(
         'service_gn520zw', 
         'template_y5wfq9d',
@@ -131,7 +112,10 @@ const LastStep = () => {
               </div>
               <div class="col-md-12">
               <label for="validationCustom03" class="form-label input-label-f">E-mailadres*</label>
-               <input type="email" class={emailadresisValid ? "form-control"  : "form-control invalid invalid-placeholder"} id="validationCustom03" required placeholder='Hier sturen wij de scan heen'
+              {
+                !emailadresisValid ?
+                <>
+                <input type="email" class="form-control" id="validationCustom03" required placeholder='Hier sturen wij de scan heen'
                 onChange={(e)=> {setEmailadres(e.target.value)
                   if (e.target.value.length !== emailRegex.test(emailadres)) {
                     setEmailadresIsValid(false);
@@ -139,7 +123,7 @@ const LastStep = () => {
                     setEmailadresIsValid(true);
                   }
                 }}
-                onBlur={(e)=>{
+                onBlur={(e)=>{setEmailadres(e.target.value)
                  if (e.target.value.length !== emailRegex.test(emailadres)) {
                    setEmailadresIsValid(false);
                  } else {
@@ -147,11 +131,36 @@ const LastStep = () => {
                  }
                }}
                 />
+                </>
+                :
+                <>
+                <input type="email" class={emailadresisValid ? "form-control"  : "form-control invalid invalid-placeholder"} id="validationCustom03" required placeholder='Hier sturen wij de scan heen'
+                onChange={(e)=> {setEmailadres(e.target.value)
+                  if (e.target.value.length !== emailRegex.test(emailadres)) {
+                    setEmailadresIsValid(false);
+                  } else {
+                    setEmailadresIsValid(true);
+                  }
+                }}
+                onBlur={(e)=>{setEmailadres(e.target.value)
+                 if (e.target.value.length !== emailRegex.test(emailadres)) {
+                   setEmailadresIsValid(false);
+                 } else {
+                   setEmailadresIsValid(true);
+                 }
+               }}
+                />
+                </>
+              }
+               
                  {!emailadresisValid &&  !emailRegex.test(emailadres) ? <div className="error">Dit veld is verplicht</div> : ''}
               </div>
               <div class="col-md-12">
               <label for="validationCustom03" class="form-label input-label-f">Telefoonnummer*</label>
-                 <input type="text" class={telefoonnummerisValid ? "form-control"  : "form-control invalid invalid-placeholder"} id="validationCustom03" required  placeholder='Voor vragen of onduidelijkheden'
+              {
+                !telefoonnummerisValid ?
+                <>
+                <input type="text" class="form-control" id="validationCustom03" required  placeholder='Voor vragen of onduidelijkheden'
                 onChange={(e)=> {setTelefoonnummer(e.target.value)
                   if (e.target.value.length >= 10) {
                     setTelefoonnummerIsValid(false);
@@ -160,7 +169,7 @@ const LastStep = () => {
                     setTelefoonnummerIsValid(true);
                   }
                 }}
-                onBlur={(e)=>{
+                onBlur={(e)=>{setTelefoonnummer(e.target.value)
                  if (e.target.value.length >= 10) {
                    setTelefoonnummerIsValid(false);
                  } else {
@@ -168,7 +177,30 @@ const LastStep = () => {
                  }
                }}
                 />
-                {telefoonnummerisValid  ? <div className="error">Dit veld is verplicht</div> : ''}
+                </>
+                :
+                <>
+                <input type="text" class={telefoonnummerisValid ? "form-control"  : "form-control invalid invalid-placeholder"} id="validationCustom03" required  placeholder='Voor vragen of onduidelijkheden'
+                onChange={(e)=> {setTelefoonnummer(e.target.value)
+                  if (e.target.value.length >= 10) {
+                    setTelefoonnummerIsValid(false);
+                    
+                  } else {
+                    setTelefoonnummerIsValid(true);
+                  }
+                }}
+                onBlur={(e)=>{setTelefoonnummer(e.target.value)
+                 if (e.target.value.length >= 10) {
+                   setTelefoonnummerIsValid(false);
+                 } else {
+                   setTelefoonnummerIsValid(true);
+                 }
+               }}
+                />
+                </>
+              }
+                 
+                {telefoonnummerisValid ? <div className="error">Dit veld is verplicht</div> : ''}
               </div>
               <p className='terms'>Ik ga akkoord met de <a href="https://www.sunrecup.be/algemenevoorwaarden/" style={{color:'#9FDE00', textDecoration:'none'}}>gebruikersvoorwaarden.</a></p>
               <div class="col-12 mb-2">
