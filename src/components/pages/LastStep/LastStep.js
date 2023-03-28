@@ -72,8 +72,8 @@ const LastStep = () => {
       .then((response) => {
        if(response){
        
-        //  navigate('/')
-        //  window.location.reload()
+         navigate('/')
+         window.location.reload()
       }
         console.log('SUCCESS!', response.status, response.text);
         
