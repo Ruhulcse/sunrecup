@@ -32,7 +32,7 @@ const FirstStep = () => {
          <div className="step-one">
          <div class="card" style={{width:'50rem'}}>
         <div class="card-body">
-            <h3 className="text-center mt-2 mb-4 card-title">Doe de gratis opbrengstscan</h3>
+            <h3 className="text-center mt-2 mb-4 card-title">Wat is de locatie van uw project?</h3>
             <div className="container">
               <form class="row g-3 needs-validation" novalidate onSubmit={handleFirstStep}>
               <div class="col-md-8">
@@ -101,7 +101,7 @@ const FirstStep = () => {
                {!woonplaatsisValid && woonplaats.length <= 0 ? <div className="error">Dit veld is verplicht</div> : ''}
               </div>
               <div class="col-12 mt- mb-2">
-                <button class="start-btn" type="submit">Start scan</button>
+                <button class="start-btn" type="submit">Ga naar step 2</button>
               </div>
             </form>
             </div>

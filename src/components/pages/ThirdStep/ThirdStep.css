@@ -71,6 +71,11 @@
   color: #333333;
 }
 
+/* extra css  */
+
+
+
+
 @media screen and (max-width: 768px) {
   .step-three {
     padding: 0% 2%;

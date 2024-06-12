@@ -4,35 +4,139 @@ import { multiStepContext } from '../../../context/FormDataProvider';
 import logo from '../../../images/logo.png';
 import Footer from '../../../share/Footer/Footer';
 import './ThirdStep.css';
+import { MdArrowForward } from "react-icons/md";
 
+const MyData={	"catgories": {
+  "Verbouwen en renoveren": {
+    "Type opdracht": {
+      "list": [
+        "Aanbouw plaatsen",
+        "Nieuw huis bouwen",
+        "Zolder verbouwen",
+        "Garage verbouwen",
+        "Kelder verbouwen",
+        "Opbouw plaatsen",
+        "Verbouwen en renoveren - algemeen"
+      ]
+    },
+    "Soort aanvraag": {
+      "list": [
+        "Particulier",
+        "Zakelijk"
+      ],
+      "inputbox": 0
+    },
+    "Sloopwerkzaamheden": {
+      "list": [
+        "Ja",
+        "Nee",
+        "Weet ik niet"
+      ]
+    },
+    "Vergunning nodig": {
+      "list": [
+        "Ja",
+        "Nee",
+        "Weet ik niet"
+      ]
+    },
+    "Vergunning al beschikbaar": {
+      "list": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    "Bouwtekening beschikbaar": {
+      "list": [
+        "Ja",
+        "Nee"
+      ]
+    },
+    "Materiaal al aanwezig": {
+      "list": [
+        "Ja",
+        "Nee",
+        "Gedeeltelijk"
+      ]
+    },
+    "Uitvoerdatum": {
+      "list": [
+        "Binnen 1 maand",
+        "Over 1 tot 3 maanden",
+        "Over 3 tot 6 maanden",
+        "Geen voorkeur"
+      ]
+    },
+    "Wilt u fotos toevoegen?": {
+      "list": [
+        "Nee",
+        "Ja"
+      ]
+    },
+    "Bent u van plan dit project te laten uitvoeren?": {
+      "list": [
+        "Ja, na het vergelijken van de vakmensen",
+        "Ik weet het nog niet, afhankelijk van de informatie",
+        "Nee, ik ben alleen op zoek naar informatie"
+      ]
+    }
+  },
+  "Keuken": {
+    "Type opdracht": {
+      "list": [
+        "Keuken verbouwen"
+      ]
+    },
+    "Uitvoerdatum": {
+      "list": [
+        "Binnen 1 maand",
+        "Over 1 tot 3 maanden",
+        "Over 3 tot 6 maanden",
+        "Geen voorkeur"
+      ]
+    },
+    "Bent u van plan dit project te laten uitvoeren?": {
+      "list": [
+        "Ja, na het vergelijken van de vakmensen",
+        "Ik weet het nog niet, afhankelijk van de informatie",
+        "Nee, ik ben alleen op zoek naar informatie"
+      ]
+    }
+  },
+  "Badkamer en toilet": {
+    "Type opdracht": {
+      "list": [
+        "Badkamer plaatsen of verbouwen",
+        "Toilet verbouwen"
+      ]
+    },
+    "Soort aanvraag": {
+      "list": [
+        "Particulier",
+        "Zakelijk"
+      ],
+      "inputbox": 0
+    },
+    "Uitvoerdatum": {
+      "date": "13/06/1995"
+    },
+    "Wilt u fots toevoegen?": {
+      "list": [
+        "Nee",
+        "Ja"
+      ]
+    },
+    "Bent u van plan dit project te laten uitvoeren?": {
+      "list": [
+        "Ja, na het vergelijken van de vakmensen",
+        "Ik weet het nog niet, afhankelijk van de informatie",
+        "Nee, ik ben alleen op zoek naar informatie"
+      ]
+    }
+  }
+}
+}
 
-const items = [
-  {
-      id:1,
-      image:'https://cdn.solvari.nl/apps/solar-panel-yield-scan/img/flat.svg',
-      title:'Plat dak'
-  },
-  {
-      id:2,
-      image:'https://cdn.solvari.nl/apps/solar-panel-yield-scan/img/slightly_pitched.svg',
-      title:'Minimale helling'
-  },
-  {
-      id:3,
-      image:'https://cdn.solvari.nl/apps/solar-panel-yield-scan/img/pitched.svg',
-      title:'Flauwe helling'
-  },
-  {
-      id:4,
-      image:'https://cdn.solvari.nl/apps/solar-panel-yield-scan/img/steep.svg',
-      title:'Standaard helling'
-  },
-  {
-      id:5,
-      image:'https://cdn.solvari.nl/apps/solar-panel-yield-scan/img/very_steep.svg',
-      title:'Steile helling'
-  },
-]
 
 const ThirdStep = () => {
     const [platisActive, setPlatIsActive] = useState(false);
@@ -42,12 +146,29 @@ const ThirdStep = () => {
     const [geschat, setGeschat] = useState("Zeer laag (2 personen, tot 2.000 kWh)");
     const [zonnepanelen, setZonnepanelen] = useState("Ik weet het nog niet, afhankelijk van advies & informatie");
     const {formdata, setFormdata} = useContext(multiStepContext)
+    const [selectedValues, setSelectedValues] = useState({});
+    const [selectedCategory, setSelectedCategory] = useState('');
+
     const navigate = useNavigate()
     const handleThirdtStep = (e)=>{
       e.preventDefault()
-         setFormdata({...formdata,  doel:doel, hellingshoek:hellingshoek, ligging:ligging, geschat:geschat,zonnepanelen:zonnepanelen})
+         setFormdata({...formdata,  doel:doel, hellingshoek:hellingshoek, ligging:ligging, geschat:geschat,zonnepanelen:zonnepanelen,  category: selectedCategory })
          navigate('/last-step')
     }
+    const handleChange = (category) => {
+      setSelectedCategory(category);
+    };
+      const Categories=MyData.catgories;
+      // console.log(selectedCategory)
+
+      const handleRadioChange = (key, value) => {
+        setSelectedValues(prevState => ({
+          ...prevState,
+          [key]: value 
+        }));
+      };
+    
+   
   return (
     <div>
         <div className="bg-image-step-3">
@@ -59,7 +180,7 @@ const ThirdStep = () => {
      <div className="step-three">
      <div class="card" style={{width:'60rem'}}>
     <div class="card-body">
-        <h3 className="text-center mt-2 mb-4 card-title">Doe de gratis opbrengstscan</h3>
+        <h3 className="text-center mt-2 mb-4 card-title">Wat zijn de details van uw project?</h3>
         <div className="container overflow-hidden">
             <div className="sub-title">
             <h4 className="mt-2 mb-2">Jouw situatie</h4>
@@ -67,93 +188,122 @@ const ThirdStep = () => {
             </div>
             <div className="row g-4">
                 <div className="col-md-8 col-12">
-                   <form onSubmit={handleThirdtStep}>
-                   <label className='select_label mb-2'>Doel van je scan</label>
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked={doel.length <= 18 ? true: false}
-                value="Zonnepanelen kopen"
-                onClick={(e)=> {
-                  setDoel(e.target.value)}}
-                />
-                <label class="form-check-label" for="flexRadioDefault1">
-                Zonnepanelen kopen
-                </label>
-                </div>
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                value="Zonnepanelen zelf installeren"
-                onClick={(e)=> setDoel(e.target.value)}
-                />
-                <label class="form-check-label" for="flexRadioDefault2">
-                Zonnepanelen zelf installeren
-                </label>
-                </div>
-                <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                 value="Ik heb al zonnepanelen"
-                 onClick={(e)=> setDoel(e.target.value)}
-                />
-                <label class="form-check-label" for="flexRadioDefault3">
-                Ik heb al zonnepanelen
-                </label>
-                </div>
-                <label className='select_label mb-2'>Hellingshoek van je dak</label>
-                <div className="container overflow-hidden">
-                  <div className="row gy-4">
-                {items.map((item, index) =>(
+                <form onSubmit={handleThirdtStep} className="p-4 border rounded">
+      <div>
+        <h2 className="text-xl font-semibold">Category:</h2>
+      </div>
+      {Object.keys(Categories).map((category, index) => (
+        <div key={index} className="flex items-center justify-between p-2 border-b">
+          <div className="flex items-center">
+            <input
+              type='radio'
+               id={`radio-${index}`}
+               name="category"
+               className="hidden"
+               checked={selectedCategory === category}
+               onChange={() => handleChange(category)}
+            />
+            <label htmlFor={`radio-${index}`} className="flex items-center cursor-pointer">
+              <span
+                className={`w-4 h-4 border-2 rounded-full flex items-center justify-center ${selectedCategory === category ? 'bg-green-500' : 'border-gray-300'}`}
+              >
+                {selectedCategory === category && <span className="text-white text-xs">&#10003;</span>}
+              </span>
+              <span className="ml-2">{category}</span>
+            </label>
+          </div>
+          {selectedCategory === category && <span className="text-green-500 text-lg">&#10003;</span>}
+        </div>
+       
+      ))};
+    <div>
+      {selectedCategory && Categories[selectedCategory] && Object.entries(Categories[selectedCategory]).map(([key, value]) => (
+        <div key={key} className="flex items-center justify-between p-2 ">
+          <div className='w-full'>
+            <span className="font-semibold">{key}:</span> 
+            {Array.isArray(value.list) ? ( 
+             
+           <ul >
+           {value.list.map((item, index) => (
+             <li key={index} className="flex items-center border-b py-2">
+               <input
+                 type="radio"
+                 id={`${key}-${index}`}
+                 name={key}
+                 value={item}
+                 className="hidden"
+                 checked={selectedValues[key] === item}
+                 onChange={() => handleRadioChange(key, item)}
+               />
+               <label htmlFor={`${key}-${index}`} className="flex items-center cursor-pointer">
+                 <span
+                   className={`w-4 h-4 border-2 rounded-full flex items-center justify-center ${selectedValues[key] === item ? 'bg-green-500' : 'border-gray-300'}`}
+                 >
+                   {selectedValues[key] === item && <span className="text-white text-xs">&#10003;</span>}
+                 </span>
                  
-                     <div className="col-md-4" onClick={()=> setHellingshoek(item.title)}>
-                    <div className={hellingshoek === item.title ? "checkable-button__active" : "checkable-button"}>
-                    <img src={item.image} draggable="false" alt="Plat dak" class="roof-orientation__icon"/>
-                    <p class="roof-orientation__title">{item.title}</p>
-                    </div>
-                   </div>
+                 <span className="ml-2">{item}</span>
+               </label>
+               
+             </li>
+           ))
+           }
+         </ul>
+            ) : typeof value === 'object' ? (
+              
+              Object.entries(value).map(([subKey, subValue]) => (
+                <div key={subKey} className='w-full'>
+                  <span className="font-semibold">{subKey}:</span>
+                  {Array.isArray(subValue.list) ? ( 
+                    <ul>
+                    {subValue.list.map((subItem, index) => (
+                      <li key={index} className="flex items-center border-b py-2">
+                        <input
+                          type="radio"
+                          id={`${subKey}-${index}`}
+                          name={subKey}
+                          value={subItem}
+                          className="hidden"
+                          checked={selectedValues[subKey] === subItem}
+                          onChange={() => handleRadioChange(subKey, subItem)}
+                        />
+                        <label htmlFor={`${subKey}-${index}`} className="flex items-center cursor-pointer">
+                          <span
+                            className={`w-4 h-4 border-2 rounded-full flex items-center justify-center ${selectedValues[subKey] === subItem ? 'bg-green-500' : 'border-gray-300'}`}
+                          >
+                            {selectedValues[subKey] === subItem && <span className="text-white text-xs">&#10003;</span>}
+                          </span>
+                          <span className="ml-2">{subItem}</span>
+                        </label>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
+                  ) : (
+                    
+                    <span>{subValue}</span>
+                  )}
                 </div>
-                <div className='mt-4'>
-                    <div className="mt-4">
-                    <label className='select_label mb-2'>Ligging van je dak</label>
-                    <select class="form-select" aria-label="Default select example"
-                    name="Liggingvanjedak"
-                    onChange={(e)=> setLigging(e.target.value)}
-                    >
-                    <option className='select_option' selected  value='Analyseer de beste ligging voor mij'>Analyseer de beste ligging voor mij</option>
-                    <option className='select_option' value='West'>West</option>
-                    <option className='select_option' value='Zuidwest'>Zuidwest</option>
-                    <option className='select_option' value='Zuiden'>Zuiden</option>
-                    <option className='select_option' value='Zuidoost'>Zuidoost</option>
-                    <option className='select_option' value='Oost'>Oost</option>
-                    </select>
-                    </div>
-                    <div className="mt-4">
-                    <label className='select_label mb-2'>Geschat jaarlijks stroomverbruik</label>
-                    <select class="form-select" aria-label="Default select example"
-                    onChange={(e)=> setGeschat(e.target.value)}
-                    >
-                    <option value="Zakelijk (meer dan 10.000 kWh)">Zakelijk (meer dan 10.000 kWh)</option>
-                    <option value="Zeer laag (2 personen, tot 2.000 kWh)" selected> Zeer laag (2 personen, tot 2.000 kWh) </option>
-                    <option value="Laag (3 personen, 2.000 kWh - 4.000 kWh)"> Laag (3 personen, 2.000 kWh - 4.000 kWh) </option>
-                    <option value="Bovengemiddeld (5 personen, 6.000 kWh - 8.000 kWh)"> Bovengemiddeld (5 personen, 6.000 kWh - 8.000 kWh) </option>
-                    <option value="Hoog (6+ personen, 8.000 - kWh - 10.000 kWh)">  Hoog (6+ personen, 8.000 - kWh - 10.000 kWh)  </option>
-                    <option value="Gemiddeld (4 personen, 4.000 kWh - 6.000 kWh)"> Gemiddeld (4 personen, 4.000 kWh - 6.000 kWh) </option>
-                    </select>
-                    </div>
-                    <div className="mt-4">
-                    <label className='select_label mb-2'>Ben je van plan om zonnepanelen te laten plaatsen?</label>
-                    <select class="form-select" aria-label="Default select example"
-                    onChange={(e)=> setZonnepanelen(e.target.value)}
-                    >
-                    <option value='Nee, ik ben alleen op zoek naar informatie'> Nee, ik ben alleen op zoek naar informatie </option>
-                    <option value="Ja, na het vergelijken van offertes"> Ja, na het vergelijken van offertes </option>
-                    <option value="Ik weet het nog niet, afhankelijk van advies & informatie" selected> Ik weet het nog niet, afhankelijk van advies & informatie  </option>
-                    </select>
-                    </div>
-                </div>
-                <div class="d-grid mb-4 mt-4">
-            <button class="start-btn step-3" type="submit">Doorgaan</button>
-            </div>
-                   </form>
+              ))
+            ) : (
+              <span>{value}</span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+    <div>
+      <h3 className='text-xl font-semibold mt-4 '>Projectomschrijving</h3>
+      <p className='text-gray-600 text-sm'>Beschrijf in het kort uw project en ontvang specifiekere offertes</p>
+      <textarea id="w3review" name="w3review" rows="5" cols="50" className='w-full border-2 border-gray-300 ronded-full' placeholder='Bijvoorbeeld ruimte(s) waar werkzaamheden plaats vinden, staat van onderhoud en oppervlakte'>At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea>
+    </div>
+
+
+      <button type="submit" className=" w-full flex  justify-center items-center px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700 mt-4 font-semibold gap-3">
+        Ga naar de laatste stap <span className='font-bold'><MdArrowForward />
+        </span>
+      </button>
+    </form>
+
                 </div>
                 <div className="col-md-4 col-12" style={{backgroundColor:'#EBEBEB'}}>
                    <div className='mt-4 mb-4'>
@@ -189,4 +339,4 @@ const ThirdStep = () => {
   )
 }
 
-export default ThirdStep
+export default ThirdStep;

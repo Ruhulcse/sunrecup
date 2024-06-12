@@ -18,7 +18,7 @@ const SeconedStep = () => {
      <div className="step-two">
      <div class="card" style={{width:'50rem'}}>
     <div class="card-body">
-        <h3 className="text-center mt-2 mb-4 card-title">Doe de gratis opbrengstscan</h3>
+        <h3 className="text-center mt-2 mb-4 card-title">Ontvang gratis offertes van aannemers</h3>
         <div className="container">
             <div className="sub-title">
             <h4 className="mt-2 mb-2">Vul je gegevens aan</h4>
